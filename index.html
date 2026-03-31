@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TLS EMEA Marketing Week 2.0</title>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:      #001F5B;
+      --blue:      #0043CE;
+      --blue-mid:  #0053B3;
+      --blue-lt:   #4589FF;
+      --blue-pale: #EFF5FF;
+      --blue-bg:   #F4F6FB;
+      --yellow:    #F8C300;
+      --text:      #0A1628;
+      --text-mid:  #3A4A6B;
+      --border:    #C8D3E6;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--blue-bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── Typography ─────────────────────────────────────────────────────── */
+    h1, h2, h3, h4 { font-weight: 700; line-height: 1.15; }
+    p { line-height: 1.6; }
+
+    /* ── Nav ────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 56px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.35);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: .75rem;
+      color: white; font-weight: 700; font-size: .95rem; text-decoration: none;
+    }
+    .nav-badge {
+      background: var(--blue);
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .55rem; font-weight: 900; color: white;
+      letter-spacing: .03em; line-height: 1.1; text-align: center;
+      border: 1.5px solid rgba(255,255,255,.4);
+      flex-shrink: 0;
+    }
+    .nav-links {
+      display: flex; gap: 1.5rem; list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,.75); text-decoration: none; font-size: .82rem;
+      font-weight: 500; transition: color .2s;
+    }
+    .nav-links a:hover { color: white; }
+    .nav-ibm {
+      width: 38px;
+      transform: rotate(-35deg);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      padding-top: 56px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,67,206,.35) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-left {
+      padding: 4rem 3rem 4rem 4rem;
+      position: relative; z-index: 1;
+    }
+    .hero-week-label {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 100px;
+      padding: .35rem 1rem;
+      color: var(--blue-lt);
+      font-size: .78rem; font-weight: 600; letter-spacing: .06em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-week-label span { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); display:block; }
+    .hero-title {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: white;
+      margin-bottom: .5rem;
+      line-height: 1.05;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--blue-lt);
+    }
+    .hero-tagline {
+      font-size: 1.1rem; font-weight: 600;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 2rem;
+      letter-spacing: .03em;
+    }
+    .hero-dates {
+      display: inline-flex; align-items: center; gap: 1rem;
+      background: var(--blue);
+      border-radius: 100px;
+      padding: .65rem 1.5rem;
+      color: white;
+      font-weight: 700; font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-dates small {
+      font-weight: 400; font-size: .75rem; opacity: .85;
+    }
+    .hero-stats {
+      display: flex; gap: 2rem;
+    }
+    .stat { color: white; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--blue-lt); line-height: 1; }
+    .stat-label { font-size: .75rem; color: rgba(255,255,255,.6); font-weight: 500; margin-top: .25rem; }
+
+    .hero-right {
+      display: flex; align-items: center; justify-content: center;
+      position: relative; padding: 2rem;
+    }
+    .hero-badge-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 2rem;
+    }
+    .iamtls-badge {
+      width: 200px; height: 200px; border-radius: 50%;
+      background: var(--blue);
+      border: 4px solid rgba(255,255,255,.25);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      box-shadow: 0 0 60px rgba(0,67,206,.6);
+      position: relative;
+    }
+    .iamtls-badge::before {
+      content: '';
+      position: absolute; inset: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.3);
+    }
+    .iamtls-badge .iam { color: rgba(255,255,255,.85); font-size: .9rem; font-weight: 600; letter-spacing: .15em; }
+    .iamtls-badge .tls { color: white; font-size: 2.8rem; font-weight: 900; line-height: 1; }
+    .iamtls-badge .ver { color: rgba(255,255,255,.5); font-size: .7rem; font-weight: 500; letter-spacing: .1em; margin-top: .2rem; }
+    .hero-charles {
+      width: 200px;
+      filter: brightness(0) invert(1);
+      opacity: .9;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,.45); font-size: .75rem;
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+      animation: bob 2s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+    .hero-scroll svg { width: 20px; opacity: .6; }
+
+    /* ── Section shared ─────────────────────────────────────────────────── */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: .75rem; font-weight: 700; letter-spacing: .14em;
+      color: var(--blue); text-transform: uppercase; margin-bottom: .75rem;
+    }
+    .section-title {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      color: var(--navy); margin-bottom: .75rem;
+    }
+    .section-sub {
+      color: var(--text-mid); font-size: 1rem; max-width: 580px;
+      margin-bottom: 3rem; line-height: 1.65;
+    }
+
+    /* ── Challenges ─────────────────────────────────────────────────────── */
+    #challenges { background: white; }
+    .challenges-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .challenge-card {
+      background: var(--blue-pale);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      cursor: pointer;
+    }
+    .challenge-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,67,206,.18);
+      border-color: var(--blue-lt);
+    }
+    .card-header {
+      background: var(--navy);
+      padding: 1.25rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .card-header.c2 { background: var(--blue); }
+    .card-header.c3 { background: var(--blue-mid); }
+    .card-header.c4 { background: #0035A5; }
+    .card-num {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .85rem; color: white;
+      flex-shrink: 0;
+    }
+    .card-title { color: white; font-size: .95rem; font-weight: 700; line-height: 1.2; }
+    .card-gif-wrap {
+      background: white;
+      padding: 0;
+      display: flex; justify-content: center;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .card-gif-wrap img { width: 100%; height: 220px; object-fit: cover; object-position: center; }
+    .challenge-card:nth-child(2) .card-gif-wrap img { height: 230px; object-position: calc(50% - 6px) calc(50% - 6px); }
+    .card-body { padding: 1.25rem; }
+    .card-desc { font-size: .88rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 1rem; }
+    .card-steps { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+    .card-steps li {
+      display: flex; gap: .5rem; align-items: flex-start;
+      font-size: .82rem; color: var(--text); line-height: 1.4;
+    }
+    .card-steps li::before {
+      content: '→';
+      color: var(--blue); font-weight: 700; flex-shrink: 0; margin-top: .05rem;
+    }
+    .card-prize {
+      margin-top: 1rem;
+      background: var(--navy);
+      border-radius: 8px;
+      padding: .6rem .9rem;
+      font-size: .78rem; font-weight: 600; color: var(--yellow);
+      display: flex; align-items: center; gap: .4rem;
+    }
+
+    /* ── How to Join ────────────────────────────────────────────────────── */
+    #join { background: var(--blue-bg); }
+    .join-steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-bottom: 3rem;
+    }
+
+    .join-link-btn {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--blue); color: white;
+      font-weight: 700; font-size: .95rem;
+      padding: .75rem 1.6rem; border-radius: 100px;
+      text-decoration: none; margin: 1rem 0 1.5rem;
+      transition: background .2s;
+    }
+    .join-link-btn:hover { background: var(--navy); }
+    .slack-screens {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: .75rem; margin-top: .5rem;
+    }
+    .slack-screen {
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
+    }
+    .slack-screen-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--blue); color: white;
+      font-size: .75rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .slack-screen img {
+      width: 100%; border-radius: 8px;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .slack-screen-label {
+      font-size: .72rem; color: var(--text-mid);
+      text-align: center; line-height: 1.35;
+    }
+    @media (max-width: 768px) {
+      .slack-screens { grid-template-columns: repeat(3, 1fr); }
+    }
+    .join-step {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1.5px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .join-step::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    }
+    .join-step.s1::after { background: var(--blue); }
+    .join-step.s2::after { background: var(--navy); }
+    .join-step.s3::after { background: var(--blue-mid); }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.3rem; color: white;
+      margin-bottom: 1rem;
+    }
+    .s1 .step-num { background: var(--blue); }
+    .s2 .step-num { background: var(--navy); }
+    .s3 .step-num { background: var(--blue-mid); }
+    .join-step h3 { font-size: 1rem; color: var(--navy); margin-bottom: .6rem; }
+    .join-step p { font-size: .88rem; color: var(--text-mid); line-height: 1.65; }
+
+    .slack-box {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .slack-left h3 { color: white; font-size: 1.1rem; margin-bottom: .4rem; }
+    .slack-left p { color: rgba(255,255,255,.65); font-size: .88rem; }
+    .slack-channel {
+      background: var(--blue);
+      color: white; font-weight: 700; font-size: 1rem;
+      padding: .75rem 1.5rem; border-radius: 100px;
+      letter-spacing: .02em; white-space: nowrap;
+    }
+    .hashtags {
+      display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem;
+    }
+    .hashtag {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: var(--blue-lt);
+      font-size: .8rem; font-weight: 600;
+      padding: .3rem .8rem; border-radius: 100px;
+    }
+
+    /* ── Roadmap ────────────────────────────────────────────────────────── */
+    #roadmap { background: white; }
+    .roadmap-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      position: relative;
+    }
+    .roadmap-track::before {
+      content: '';
+      position: absolute;
+      top: 24px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--navy), var(--blue-mid), #0035A5);
+      z-index: 0;
+    }
+    .roadmap-col { display: flex; flex-direction: column; align-items: center; gap: .75rem; }
+    .roadmap-dot {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1rem; color: white;
+      position: relative; z-index: 1;
+      box-shadow: 0 0 0 4px white, 0 0 0 6px currentColor;
+    }
+    .roadmap-col:nth-child(1) .roadmap-dot { background: var(--blue); color: var(--blue); }
+    .roadmap-col:nth-child(2) .roadmap-dot { background: var(--navy); color: var(--navy); }
+    .roadmap-col:nth-child(3) .roadmap-dot { background: var(--blue-mid); color: var(--blue-mid); }
+    .roadmap-col:nth-child(4) .roadmap-dot { background: #0035A5; color: #0035A5; }
+    .roadmap-dot span { color: white; }
+    .roadmap-col-title {
+      font-size: .82rem; font-weight: 700; color: var(--navy);
+      text-align: center; line-height: 1.3;
+    }
+    .roadmap-steps {
+      list-style: none; display: flex; flex-direction: column; gap: .5rem;
+      width: 100%;
+    }
+    .roadmap-steps li {
+      background: var(--blue-pale);
+      border-radius: 8px;
+      padding: .6rem .9rem;
+      font-size: .8rem; color: var(--text-mid);
+      text-align: center; line-height: 1.35;
+      border: 1px solid var(--border);
+    }
+
+    /* ── Posters ────────────────────────────────────────────────────────── */
+    #posters { background: var(--blue-bg); }
+    .posters-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .poster-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1.5px solid var(--border);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .poster-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,31,91,.15); }
+    .poster-img { width: 100%; display: block; height: auto; }
+    .poster-info { padding: 1.25rem; }
+    .poster-info h3 { font-size: 1rem; color: var(--navy); margin-bottom: .4rem; }
+    .poster-info p { font-size: .85rem; color: var(--text-mid); }
+    .poster-tag {
+      display: inline-block; margin-top: .75rem;
+      background: var(--blue-pale); border: 1px solid var(--blue-lt);
+      color: var(--blue); font-size: .75rem; font-weight: 600;
+      padding: .25rem .7rem; border-radius: 100px;
+    }
+
+    /* ── Prizes banner ───────────────────────────────────────────────────── */
+    #prizes { background: var(--navy); padding: 3rem 2rem; }
+    .prizes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+    .prize-item {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      transition: background .2s;
+    }
+    .prize-item:hover { background: rgba(255,255,255,.13); }
+    .prize-icon { font-size: 2.2rem; margin-bottom: .75rem; }
+    .prize-name { color: white; font-size: .9rem; font-weight: 700; margin-bottom: .3rem; }
+    .prize-detail { color: var(--blue-lt); font-size: .78rem; line-height: 1.4; }
+    #prizes .section-title { color: white; }
+    #prizes .section-label { color: var(--yellow); }
+
+    /* ── Footer ──────────────────────────────────────────────────────────── */
+    footer {
+      background: #000F30;
+      color: rgba(255,255,255,.55);
+      padding: 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      font-size: .8rem;
+    }
+    footer strong { color: white; }
+    .footer-ibm {
+      background: var(--blue);
+      color: white; font-weight: 700; font-size: .8rem;
+      padding: .3rem .7rem; border-radius: 3px; letter-spacing: .06em;
+    }
+
+    /* ── Animations ──────────────────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .fade-up:nth-child(2) { transition-delay: .08s; }
+    .fade-up:nth-child(3) { transition-delay: .16s; }
+    .fade-up:nth-child(4) { transition-delay: .24s; }
+
+    /* ── Responsive ──────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 5rem 1.5rem 2rem; text-align: center; }
+      .hero-stats { justify-content: center; }
+      .hero-right { padding: 1rem 1.5rem 3rem; }
+      .nav-links { display: none; }
+      .roadmap-track { grid-template-columns: 1fr 1fr; }
+      .roadmap-track::before { display: none; }
+      .slack-box { flex-direction: column; text-align: center; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ──────────────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="nav-badge">I AM<br>TLS</div>
+    TLS EMEA Marketing Week 2.0
+  </a>
+  <ul class="nav-links">
+    <li><a href="#challenges">Challenges</a></li>
+    <li><a href="#join">How to Join</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#posters">Posters</a></li>
+    <li><a href="#prizes">Prizes</a></li>
+  </ul>
+  <img class="nav-ibm" src="dunkelblau.png" alt="I AM TLS" />
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────────────────────── -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <div class="hero-week-label">
+      <span></span> IBM TECHNOLOGY LIFECYCLE SERVICES
+    </div>
+    <h1 class="hero-title">TLS EMEA<br>Marketing<br><em>Week 2.0</em></h1>
+    <p class="hero-tagline">MAKE YOUR MARK. BE SEEN. BE TLS.</p>
+    <div class="hero-dates">
+      01.07. – 10.07.2026
+      <small>8 Days &nbsp;·&nbsp; 4 Challenges &nbsp;·&nbsp; 1 Brand</small>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Days</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Challenges</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Brand</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-badge-wrap">
+      <div class="iamtls-badge">
+        <img src="dunkelblau.png" alt="TLS Badge" style="width: 100%; height: 100%; object-fit: contain;" />
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    scroll to explore
+  </div>
+</section>
+
+<!-- ── Challenges ───────────────────────────────────────────────────────── -->
+<section id="challenges">
+  <div class="container">
+    <p class="section-label">The Activities</p>
+    <h2 class="section-title">4 Challenges. One Brand.</h2>
+    <p class="section-sub">Join one — or all four! Every challenge helps connect the TLS EMEA team and build visibility for what we do together.</p>
+    <div class="challenges-grid">
+
+      <!-- Challenge 1 -->
+      <div class="challenge-card fade-up">
+        <div class="card-header c1">
+          <div class="card-num">1</div>
+          <div class="card-title">Posters &amp;<br>Stickers</div>
+        </div>
+        <div class="card-gif-wrap">
+          <img src="sticker_challenge.png" alt="Sticker challenge from 2023" />
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Download a poster or grab a sticker, place it anywhere creative — your office or home desk — and share your best photo in the Slack channel.</p>
+          <ul class="card-steps">
+            <li>Get poster or sticker from the Box link in Slack</li>
+            <li>Place it somewhere creative &amp; take a photo</li>
+            <li>Post your photo in #tls-emea-marketing-week-2</li>
+          </ul>
+          <div class="card-prize">🏆 Best photo wins a prize!</div>
+        </div>
+      </div>
+
+      <!-- Challenge 2 -->
+      <div class="challenge-card fade-up">
+        <div class="card-header c2">
+          <div class="card-num">2</div>
+          <div class="card-title">Market GM<br>Challenge</div>
+        </div>
+        <div class="card-gif-wrap">
+          <img src="Charles_2.gif" alt="Charles and a colleague high-five" />
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Convince your Market GM to record and share a TLS message with the entire market — showcasing key offerings or a success story. Creativity wins!</p>
+          <ul class="card-steps">
+            <li>Pitch your best TLS story to your Market GM</li>
+            <li>GM records &amp; shares a short video message</li>
+            <li>Market sees TLS in action — visibility grows!</li>
+          </ul>
+          <div class="card-prize">🏆 Best GM message wins a special prize!</div>
+        </div>
+      </div>
+
+      <!-- Challenge 3 -->
+      <div class="challenge-card fade-up">
+        <div class="card-header c3">
+          <div class="card-num">3</div>
+          <div class="card-title">TLS Insight<br>Session</div>
+        </div>
+        <div class="card-gif-wrap">
+          <img src="Charles_4.gif" alt="Two Charles characters talk" />
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Set up a meeting with colleagues <em>outside</em> of TLS — from other brands or the Horizon/Select sales team. Online or face-to-face, 10–15 minutes is all it takes.</p>
+          <ul class="card-steps">
+            <li>Schedule a short meeting outside TLS</li>
+            <li>Explain what TLS does &amp; the value we bring</li>
+            <li>Post a screenshot or selfie in Slack to win</li>
+          </ul>
+          <div class="card-prize">💡 Blue Points scale with attendees!</div>
+        </div>
+      </div>
+
+      <!-- Challenge 4 -->
+      <div class="challenge-card fade-up">
+        <div class="card-header c4">
+          <div class="card-num">4</div>
+          <div class="card-title">LinkedIn<br>Challenge</div>
+        </div>
+        <div class="card-gif-wrap">
+          <img src="Charles_1.gif" alt="Charles shares a 5-star review" />
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Create visibility on LinkedIn using pre-made templates (in Box) or your own content — within IBM guidelines. Every post with <strong>#IAMTLS</strong> enters you into the prize pool.</p>
+          <ul class="card-steps">
+            <li>Get LinkedIn templates from Box via Slack</li>
+            <li>Post TLS content with #IAMTLS on LinkedIn</li>
+            <li>Each post = 1 ticket in the prize draw!</li>
+          </ul>
+          <div class="card-prize">🎟 Prize pool drawing — every post counts!</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── How to Join ───────────────────────────────────────────────────────── -->
+<section id="join">
+  <div class="container">
+    <p class="section-label">Getting Started</p>
+    <h2 class="section-title">How to Join &amp; Get Started</h2>
+    <p class="section-sub">Two simple steps and you're in. Everything happens in the IBM Slack workspace.</p>
+
+    <div class="join-steps">
+      <div class="join-step s1 fade-up">
+        <div class="step-num">1</div>
+        <h3>Join the Slack Channel</h3>
+        <p>Click the button below to join <strong>#tls-emea-marketing-week-2</strong> in the IBM <em>Technology Lifecycle Services</em> workspace. Sign in with your IBM email, select your IBM account, then choose <strong>Technology Lifecycle Services</strong> as your workspace and hit Continue. That's it — you're in!</p>
+        <a class="join-link-btn" href="https://join.slack.com/share/enQtMTA2NTY4NDM2MDM3MTctZTQxMTZkMmQ1NzVkMjMwMjVkYzRmMjlmNDI0M2RjMGExNzE1ZTM4MjdlNDQ5ZTRjYmJiNGRhNWM1ZDNkNTVlZQ" target="_blank">
+          → Join the Slack Channel
+        </a>
+      </div>
+      <div class="join-step s2 fade-up">
+        <div class="step-num">2</div>
+        <h3>Start Creating &amp; Sharing</h3>
+        <p>All posters, stickers, LinkedIn templates and video guides are linked in the channel. Create your content, post it, and use <strong>#IAMTLS</strong> on every LinkedIn post you share!</p>
+      </div>
+    </div>
+
+    <div class="slack-box fade-up">
+      <div class="slack-left">
+        <h3>Our Slack Channel</h3>
+        <p>All communications, daily videos, challenge links &amp; updates live here.</p>
+        <div class="hashtags">
+          <span class="hashtag">#IAMTLS</span>
+          <span class="hashtag">#ibmtls</span>
+          <span class="hashtag">#livingthelifecycle</span>
+        </div>
+      </div>
+      <div class="slack-channel">#tls-emea-marketing-week-2</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Roadmap ───────────────────────────────────────────────────────────── -->
+<section id="roadmap">
+  <div class="container">
+    <p class="section-label">Your Roadmap</p>
+    <h2 class="section-title">Launch the Lifecycle</h2>
+    <p class="section-sub">Pick a track — or all of them — and follow the three steps to complete each challenge.</p>
+
+    <div class="roadmap-track">
+      <div class="roadmap-col fade-up">
+        <div class="roadmap-dot"><span>1</span></div>
+        <div class="roadmap-col-title">Posters &amp;<br>Stickers</div>
+        <ul class="roadmap-steps">
+          <li>Get poster/sticker from Box</li>
+          <li>Place it somewhere creative</li>
+          <li>📸 Share photo in Slack</li>
+        </ul>
+      </div>
+      <div class="roadmap-col fade-up">
+        <div class="roadmap-dot"><span>2</span></div>
+        <div class="roadmap-col-title">Market GM<br>Challenge</div>
+        <ul class="roadmap-steps">
+          <li>Pitch your GM your best story</li>
+          <li>GM records a video message</li>
+          <li>🎯 Market sees TLS in action</li>
+        </ul>
+      </div>
+      <div class="roadmap-col fade-up">
+        <div class="roadmap-dot"><span>3</span></div>
+        <div class="roadmap-col-title">TLS Insight<br>Session</div>
+        <ul class="roadmap-steps">
+          <li>Set up a 10–15 min meeting</li>
+          <li>Explain TLS to non-TLS peers</li>
+          <li>💬 Post screenshot in Slack</li>
+        </ul>
+      </div>
+      <div class="roadmap-col fade-up">
+        <div class="roadmap-dot"><span>4</span></div>
+        <div class="roadmap-col-title">LinkedIn<br>Challenge</div>
+        <ul class="roadmap-steps">
+          <li>Get templates from Box</li>
+          <li>Post with #IAMTLS</li>
+          <li>🔗 Each post = 1 prize ticket</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2.5rem;">
+      <div style="display:inline-flex;align-items:center;gap:.75rem;background:var(--navy);color:white;padding:.9rem 2rem;border-radius:100px;font-weight:700;font-size:.95rem;">
+        🎉 React to your teammates' posts &amp; support each other!
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Posters ───────────────────────────────────────────────────────────── -->
+<section id="posters">
+  <div class="container">
+    <p class="section-label">Assets &amp; Resources</p>
+    <h2 class="section-title">Official TLS Posters</h2>
+    <p class="section-sub">Use these in your office, as a virtual background, or stick them up around your location. High-res files are available in Box — link in the Slack channel.</p>
+    <div class="posters-grid">
+      <div class="poster-card fade-up">
+        <img class="poster-img" src="Poster_Idee_1_edited_4k.jpg" alt="The Vital Charge poster" />
+        <div class="poster-info">
+          <h3>The Vital Charge</h3>
+          <p>Powering longevity together — IBM TLS keeps infrastructure running.</p>
+          <span class="poster-tag">📦 Available in Box</span>
+        </div>
+      </div>
+      <div class="poster-card fade-up">
+        <img class="poster-img" src="Poster_Idee_2_edited_4k.jpg" alt="Securing the Summit poster" />
+        <div class="poster-info">
+          <h3>Securing the Summit</h3>
+          <p>Supporting every step of the journey — IBM TLS and Infrastructure side by side.</p>
+          <span class="poster-tag">📦 Available in Box</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Prizes ────────────────────────────────────────────────────────────── -->
+<section id="prizes">
+  <div class="container">
+    <p class="section-label">Rewards</p>
+    <h2 class="section-title" style="margin-bottom:2.5rem;">What You Can Win</h2>
+    <div class="prizes-grid">
+      <div class="prize-item fade-up">
+        <div class="prize-icon">📸</div>
+        <div class="prize-name">Posters &amp; Stickers</div>
+        <div class="prize-detail">Best creative photo wins a prize</div>
+      </div>
+      <div class="prize-item fade-up">
+        <div class="prize-icon">🏆</div>
+        <div class="prize-name">Market GM Challenge</div>
+        <div class="prize-detail">Best GM video message wins a special award</div>
+      </div>
+      <div class="prize-item fade-up">
+        <div class="prize-icon">💡</div>
+        <div class="prize-name">TLS Insight Session</div>
+        <div class="prize-detail">Blue Points scale with number of attendees</div>
+      </div>
+      <div class="prize-item fade-up">
+        <div class="prize-icon">🎟</div>
+        <div class="prize-name">LinkedIn Challenge</div>
+        <div class="prize-detail">Every #IAMTLS post = 1 prize-pool ticket. Winners drawn randomly.</div>
+      </div>
+      <div class="prize-item fade-up" style="background:rgba(248,195,0,.1);border-color:rgba(248,195,0,.3);">
+        <div class="prize-icon">📅</div>
+        <div class="prize-name" style="color:var(--yellow);">01.07. – 10.07.2026</div>
+        <div class="prize-detail">8 days · 4 challenges · ONE BRAND</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────────────────────── -->
+<footer>
+  <div>
+    <strong>TLS EMEA Marketing Week 2.0</strong> &nbsp;·&nbsp;
+    Slack: <strong>#tls-emea-marketing-week-2</strong> &nbsp;·&nbsp;
+    IBM Technology Lifecycle Services &nbsp;·&nbsp;
+    © 2026 IBM Corporation &nbsp;·&nbsp;
+    Contact: Ron Ebken (Ron.Ebken@ibm.com)
+  </div>
+  <span class="footer-ibm">IBM</span>
+</footer>
+
+<!-- ── Scroll-reveal JS ──────────────────────────────────────────────────── -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
