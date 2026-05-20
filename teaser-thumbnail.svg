@@ -1,0 +1,67 @@
+<svg width="1280" height="720" viewBox="0 0 680 383" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <radialGradient id="glow" cx="50%" cy="52%" r="55%">
+    <stop offset="0%" stop-color="#0043CE" stop-opacity="0.45"/>
+    <stop offset="100%" stop-color="#001F5B" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="btnGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#4589FF" stop-opacity="0.35"/>
+    <stop offset="100%" stop-color="#0043CE" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<!-- Background -->
+<rect width="680" height="383" fill="#001F5B"/>
+<rect width="680" height="383" fill="url(#glow)"/>
+
+<!-- Subtle grid lines -->
+<line x1="0" y1="95" x2="680" y2="95" stroke="#0043CE" stroke-width="0.4" opacity="0.2"/>
+<line x1="0" y1="288" x2="680" y2="288" stroke="#0043CE" stroke-width="0.4" opacity="0.2"/>
+<line x1="170" y1="0" x2="170" y2="383" stroke="#0043CE" stroke-width="0.4" opacity="0.2"/>
+<line x1="510" y1="0" x2="510" y2="383" stroke="#0043CE" stroke-width="0.4" opacity="0.2"/>
+
+<!-- Corner brackets – top left -->
+<path d="M20,40 L20,20 L60,20" fill="none" stroke="#4589FF" stroke-width="1.5" opacity="0.6"/>
+<!-- Corner brackets – top right -->
+<path d="M620,20 L660,20 L660,40" fill="none" stroke="#4589FF" stroke-width="1.5" opacity="0.6"/>
+<!-- Corner brackets – bottom left -->
+<path d="M20,343 L20,363 L60,363" fill="none" stroke="#4589FF" stroke-width="1.5" opacity="0.6"/>
+<!-- Corner brackets – bottom right -->
+<path d="M620,363 L660,363 L660,343" fill="none" stroke="#4589FF" stroke-width="1.5" opacity="0.6"/>
+
+<!-- Yellow accent bar top -->
+<rect x="0" y="0" width="680" height="4" fill="#F8C300"/>
+
+<!-- IBM badge -->
+<rect x="616" y="13" width="44" height="19" rx="2" fill="#0043CE"/>
+<text x="638" y="26" font-family="Helvetica Neue,Arial,sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">IBM</text>
+
+<!-- Eyebrow label -->
+<text x="340" y="58" font-family="Helvetica Neue,Arial,sans-serif" font-size="10" font-weight="600" fill="#4589FF" text-anchor="middle" letter-spacing="3" opacity="0.85">IBM TECHNOLOGY LIFECYCLE SERVICES · EMEA</text>
+
+<!-- Thin rule below eyebrow -->
+<line x1="200" y1="67" x2="480" y2="67" stroke="#4589FF" stroke-width="0.5" opacity="0.35"/>
+
+<!-- Main headline -->
+<text x="340" y="142" font-family="Helvetica Neue,Arial,sans-serif" font-size="66" font-weight="800" fill="white" text-anchor="middle" letter-spacing="-2">SOMETHING</text>
+<text x="340" y="208" font-family="Helvetica Neue,Arial,sans-serif" font-size="66" font-weight="800" fill="#4589FF" text-anchor="middle" letter-spacing="-2">IS COMING.</text>
+
+<!-- Play button glow -->
+<circle cx="340" cy="272" r="52" fill="url(#btnGlow)" opacity="0.6"/>
+
+<!-- Play button ring -->
+<circle cx="340" cy="272" r="38" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+
+<!-- Play button -->
+<circle cx="340" cy="272" r="32" fill="#0043CE"/>
+<!-- Play triangle -->
+<polygon points="333,260 333,284 355,272" fill="white"/>
+
+<!-- Branding line -->
+<text x="340" y="330" font-family="Helvetica Neue,Arial,sans-serif" font-size="13" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5" opacity="0.9">TLS EMEA MARKETING WEEK 2.0</text>
+
+<!-- Date pill -->
+<rect x="291" y="342" width="98" height="22" rx="11" fill="#0043CE"/>
+<text x="340" y="357" font-family="Helvetica Neue,Arial,sans-serif" font-size="10" font-weight="700" fill="white" text-anchor="middle" letter-spacing="0.5">01.07. – 10.07.2026</text>
+
+</svg>

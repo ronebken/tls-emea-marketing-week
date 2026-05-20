@@ -213,6 +213,7 @@
       background: var(--navy);
       padding: 1.25rem;
       display: flex; align-items: center; gap: .75rem;
+      min-height: 72px;
     }
     .card-header.c2 { background: var(--blue); }
     .card-header.c3 { background: var(--blue-mid); }
@@ -234,7 +235,8 @@
     }
     .card-gif-wrap img { width: 100%; height: 220px; object-fit: cover; object-position: center; }
     .challenge-card:nth-child(2) .card-gif-wrap img { height: 230px; object-position: calc(50% - 6px) calc(50% - 6px); }
-    .card-body { padding: 1.25rem; }
+    .challenge-card { display: flex; flex-direction: column; }
+    .card-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
     .card-desc { font-size: .88rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 1rem; }
     .card-steps { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
     .card-steps li {
@@ -246,7 +248,8 @@
       color: var(--blue); font-weight: 700; flex-shrink: 0; margin-top: .05rem;
     }
     .card-prize {
-      margin-top: 1rem;
+      margin-top: auto;
+      padding-top: 1rem;
       background: var(--navy);
       border-radius: 8px;
       padding: .6rem .9rem;
@@ -642,10 +645,8 @@
       <div class="join-step s1 fade-up">
         <div class="step-num">1</div>
         <h3>Join the Slack Channel</h3>
-        <p>Click the button below to join <strong>#tls-emea-marketing-week-2</strong> in the IBM <em>Technology Lifecycle Services</em> workspace. Sign in with your IBM email, select your IBM account, then choose <strong>Technology Lifecycle Services</strong> as your workspace and hit Continue. That's it — you're in!</p>
-        <a class="join-link-btn" href="https://join.slack.com/share/enQtMTA2NTY4NDM2MDM3MTctZTQxMTZkMmQ1NzVkMjMwMjVkYzRmMjlmNDI0M2RjMGExNzE1ZTM4MjdlNDQ5ZTRjYmJiNGRhNWM1ZDNkNTVlZQ" target="_blank">
-          → Join the Slack Channel
-        </a>
+        <p>Open Slack and paste the channel name into the search bar, select the channel from the results, and hit <strong>Join</strong>. That's it — you're in!</p>
+        <div class="join-link-btn" style="cursor:default;margin-top:1rem;">#tls-emea-marketing-week-2</div>
       </div>
       <div class="join-step s2 fade-up">
         <div class="step-num">2</div>
